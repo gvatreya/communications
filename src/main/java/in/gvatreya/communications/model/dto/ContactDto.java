@@ -34,6 +34,17 @@ public class ContactDto {
                 .build();
     }
 
+    public Contact toModel(){
+        return Contact.builder()
+                .uuid(this.uuid)
+                .name(this.name)
+                .email(this.email)
+                .telegramHandle(this.telegramHandle)
+                .twitterId(this.twitterId)
+                .phoneNumber(this.phoneNumber)
+                .build();
+    }
+
     /**
      * Helper method that validates the ContactDto object
      * @return {@link ValidationResponse}
@@ -44,10 +55,6 @@ public class ContactDto {
         response.setValid(true);
         final List<String> problems = new ArrayList<>();
 
-        if(null == this.uuid) {
-            response.setValid(false);
-            problems.add("uuid is null");
-        }
         if(StringUtils.isBlank(this.name) ) {
             response.setValid(false);
             problems.add("name is empty/blank");

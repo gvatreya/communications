@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS contact(
 
     id SERIAL,
 
-    uuid varchar(16) NOT NULL,
+    uuid varchar(64) NOT NULL,
     name varchar(64) NOT NULL,
     email varchar(64) NOT NULL,
     telegram_handle varchar(64),
