@@ -12,7 +12,10 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -38,5 +41,17 @@ public class ContactServiceImpl implements ContactService {
             throw new IllegalArgumentException(StringUtils
                     .collectionToCommaDelimitedString(validationResponse.getProblems()));
         }
+    }
+
+    @Override
+    public Collection<ContactDto> getAllContacts() {
+        final Collection<Contact> contacts = contactRepository.findAll();
+        return contacts.stream().map(ContactDto::fromModel).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<ContactDto> getContact(@NonNull final String uuid) {
+        final Optional<Contact> byUuid = contactRepository.findByUuid(uuid);
+        return byUuid.map(ContactDto::fromModel);
     }
 }

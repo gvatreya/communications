@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/v1/contacts")
 @Validated
@@ -29,5 +33,22 @@ public class ContactController {
     public ResponseEntity<ContactDto> createContact(@RequestBody final ContactDto contactDto) {
         final ContactDto createdContact = contactService.createContact(contactDto);
         return new ResponseEntity<>(createdContact, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{uuid}")
+    @ResponseBody
+    @Operation(summary = "Get contact with uuid", description = "Get details of the contact whose uuid is passed")
+    public ResponseEntity<ContactDto> getContact(@PathVariable("uuid")final String contactUuid) {
+        final Optional<ContactDto> contactDto = contactService.getContact(contactUuid);
+        return contactDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping
+    @ResponseBody
+    @Operation(summary = "Get all Contacts", description = "Get all contacts in the system")
+    public ResponseEntity<Collection<ContactDto>> getAllContacts() {
+        final Collection<ContactDto> contacts = contactService.getAllContacts();
+        return new ResponseEntity<>(contacts, HttpStatus.OK);
     }
 }
