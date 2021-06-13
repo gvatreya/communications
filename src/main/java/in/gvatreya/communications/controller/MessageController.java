@@ -1,6 +1,5 @@
 package in.gvatreya.communications.controller;
 
-import in.gvatreya.communications.model.dto.ChannelDto;
 import in.gvatreya.communications.model.dto.MessageDto;
 import in.gvatreya.communications.services.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/messages")
@@ -32,9 +32,17 @@ public class MessageController {
 
     @GetMapping("/{uuid}")
     @ResponseBody
+    @Operation(summary = "Get Messages for a given uuid", description = "Get message given messageUuid")
+    public ResponseEntity<Optional<MessageDto>> getMessage(@PathVariable("uuid")final String uuid) {
+        final Optional<MessageDto> message = messageService.getMessage(uuid);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @GetMapping("/contact/{uuid}")
+    @ResponseBody
     @Operation(summary = "Get all Messages for a contact uuid", description = "Get all messages for a given contact")
     public ResponseEntity<Collection<MessageDto>> listMessages(@PathVariable("uuid")final String contactUuid) {
-        final Collection<MessageDto> allChannels = messageService.getAllMessages();
-        return new ResponseEntity<>(allChannels, HttpStatus.OK);
+        final Collection<MessageDto> messages = messageService.getAllMessagesOfContact(contactUuid);
+        return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 }

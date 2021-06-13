@@ -11,7 +11,7 @@ public interface MessageService {
 
     MessageDto createMessage(@NonNull MessageDto messageDto);
 
-    Collection<MessageDto> getAllMessages();
+    Collection<MessageDto> getAllMessagesOfContact(@NonNull String uuid);
 
     Optional<MessageDto> getMessage(@NonNull final String uuid);
 

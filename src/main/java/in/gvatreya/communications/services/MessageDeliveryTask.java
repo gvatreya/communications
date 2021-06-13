@@ -6,8 +6,7 @@ import org.apache.commons.lang3.RandomUtils;
 
 public class MessageDeliveryTask implements Runnable {
 
-    private MessageService messageService;
-    private MessageDeliveryCallback callback;
+    private final MessageDeliveryCallback callback;
 
     private final Message message;
 
@@ -20,11 +19,11 @@ public class MessageDeliveryTask implements Runnable {
     public void run() {
         //FIXME: This thread will look at the channel and then will call appropriate
         // services to deliver the message by the specified channel
-        // For now, this will wait for 1.5 seconds and then update
+        // For now, this will wait for 1 minutes and then update
         // the message delivery status to either Delivered or Error (randomly)
         Thread.currentThread().setName("MSG_DLVRY_" + message.getId());
         try {
-            Thread.sleep(1500);
+            Thread.sleep(60000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

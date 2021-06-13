@@ -56,8 +56,9 @@ class ContactRepositoryTest extends AbstractRepositoryTest {
         assertNotNull(contacts[3].getModified(), "modified is null");
         assertNull(contacts[3].getDeleted(), "expected deleted to be null");
 
-    }@Test
+    }
 
+    @Test
     @SqlGroup({
             @Sql(scripts = "classpath:/sql/data-setup.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
             @Sql(scripts = "classpath:/sql/data-teardown.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)

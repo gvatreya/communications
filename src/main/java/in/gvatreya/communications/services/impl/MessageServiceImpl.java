@@ -1,9 +1,12 @@
 package in.gvatreya.communications.services.impl;
 
 import in.gvatreya.communications.model.Channel;
+import in.gvatreya.communications.model.Contact;
 import in.gvatreya.communications.model.Message;
+import in.gvatreya.communications.model.dto.ContactDto;
 import in.gvatreya.communications.model.dto.MessageDto;
 import in.gvatreya.communications.repository.ChannelRepository;
+import in.gvatreya.communications.repository.ContactRepository;
 import in.gvatreya.communications.repository.MessageRepository;
 import in.gvatreya.communications.services.*;
 import in.gvatreya.communications.utils.Constants;
@@ -15,9 +18,12 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -31,7 +37,13 @@ public class MessageServiceImpl implements MessageService {
     private MessageRepository messageRepository;
 
     @Autowired
+    private ContactRepository contactRepository;
+
+    @Autowired
     private ChannelRepository channelRepository;
+
+    @Autowired
+    private MessageDeliveryCallback messageDeliveryCallback;
 
     @Override
     public MessageDto createMessage(@NonNull final MessageDto messageDto) {
@@ -68,10 +80,10 @@ public class MessageServiceImpl implements MessageService {
             final Message savedContact = messageRepository.save(messageToSave);
 
             // Register delivery callback
-            final MessageDeliveryCallback callback = new MessageDeliverycallbackImpl();
+//            final MessageDeliveryCallback callback = new MessageDeliverycallbackImpl();
             // Attempt Delivery
             ExecutorService messageDeliveryExecutors = MessageThreadsManager.getInstance().getMessageThreadPool();
-            messageDeliveryExecutors.execute(new MessageDeliveryTask(savedContact, callback));
+            messageDeliveryExecutors.execute(new MessageDeliveryTask(savedContact, messageDeliveryCallback));
 
 
             return MessageDto.fromModel(savedContact, idUuidMap);
@@ -82,18 +94,49 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Collection<MessageDto> getAllMessages() {
-        return null;
+    public Collection<MessageDto> getAllMessagesOfContact(@NonNull String uuid) {
+        final Optional<Contact> contact = contactRepository.findByUuid(uuid);
+        if(contact.isPresent()) {
+            final Collection<Message> all = messageRepository.findAllBySenderIdOrReceiverId(contact.get().getId());
+            final Collection<Long> receiverIds = all.stream().map(Message::getReceiverId).collect(Collectors.toList());
+            final Collection<Long> senderIds = all.stream().map(Message::getSenderId).collect(Collectors.toList());
+            final Collection<Long> channelIds = all.stream().map(Message::getChannelId).collect(Collectors.toList());
+            final List<Long> ids = Stream.concat(receiverIds.stream(), senderIds.stream()).collect(Collectors.toList());
+            final Collection<Contact> allById = contactRepository.findAllById(ids);
+            final Collection<Channel> channels = channelRepository.findAllById(channelIds);
+            final Map<Long, String> idUuidMap = allById.stream()
+                    .collect(Collectors.toMap(Contact::getId, Contact::getUuid));
+            final Map<Long, String> channelIdUuidMap = channels.stream().collect(Collectors.toMap(Channel::getId, Channel::getUuid));
+            idUuidMap.putAll(channelIdUuidMap);
+            return all.stream().map(message -> MessageDto.fromModel(message, idUuidMap)).collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @Override
     public Optional<MessageDto> getMessage(@NonNull final String uuid) {
-        return Optional.empty();
+        final Message message = messageRepository.findByUuid(uuid);
+
+        final List<Long> ids = new ArrayList<>();
+        ids.add(message.getSenderId());
+        ids.add(message.getReceiverId());
+
+        final Map<Long, String> idUuidMap = contactService.getUuids(ids);
+        assert idUuidMap.size() == 2;
+
+        final Optional<Channel> channel = channelRepository.findById(message.getChannelId());
+        channel.ifPresent(value -> idUuidMap.put(value.getId(), value.getUuid()));
+
+        return Optional.ofNullable(MessageDto.fromModel(message, idUuidMap));
     }
 
     @Override
+    @Transactional
     public MessageDto updateStatus(@NonNull final String uuid, @NonNull final String deliveryStatus) {
-        final Message message = messageRepository.updateStatus(uuid, deliveryStatus);
+        final int i = messageRepository.updateStatus(uuid, deliveryStatus);
+
+        final Message message = messageRepository.findByUuid(uuid);
 
         final List<Long> contactIds = new ArrayList<>();
         contactIds.add(message.getSenderId());
