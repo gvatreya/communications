@@ -2,7 +2,6 @@ package in.gvatreya.communications.repository;
 
 import in.gvatreya.communications.TestUtility;
 import in.gvatreya.communications.model.Contact;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -108,9 +107,7 @@ class ContactRepositoryTest extends AbstractRepositoryTest {
         final String UUID_1 = UUID.randomUUID().toString();
 
         final Contact preBuildContact = TestUtility.getPreBuildContact(UUID_1);
-        System.out.println(preBuildContact);
         final Contact contact = contactRepository.save(preBuildContact);
-        System.out.println(contact);
         assertNotNull(contact, "contact is null");
         assertNotNull(contact.getId(), "id is null");
         assertEquals(UUID_1, contact.getUuid(), "id mismatch");
@@ -122,6 +119,26 @@ class ContactRepositoryTest extends AbstractRepositoryTest {
         assertNotNull(contact.getCreated(), "created is null");
         assertNotNull(contact.getModified(), "modified is null");
         assertNull(contact.getDeleted(), "expected deleted to be null");
+    }
+
+    @Test
+    void getUuids() {
+
+        final String UUID_1 = UUID.randomUUID().toString();
+        final String UUID_2 = UUID.randomUUID().toString();
+
+        final Contact contact1 = contactRepository.save(Contact.builder().uuid(UUID_1).name("test1").email("test1@test1.com").build());
+        final Contact contact2 = contactRepository.save(Contact.builder().uuid(UUID_2).name("test2").email("test2@test2.com").build());
+
+        final Set<Long> ids = new HashSet<>();
+        ids.add(contact1.getId());
+        ids.add(contact2.getId());
+
+        final List<Contact> uuids = contactRepository.findAllById(ids);
+        assertEquals(2, uuids.size(), "Expected 2 uuids got " + uuids.size());
+        assertEquals(UUID_1, uuids.toArray()[0], "UUID mismatch ");
+        assertEquals(UUID_2, uuids.toArray()[1], "UUID mismatch");
+
     }
 
 }

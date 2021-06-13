@@ -12,8 +12,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 //FIXME This entire Service is a privileged service and requires the user to have role ROLE_ADMIN
@@ -45,5 +44,16 @@ public class ChannelServiceImpl implements ChannelService {
     public Collection<ChannelDto> getAllChannels() {
         final Collection<Channel> channels = channelRepository.findAll();
         return channels.stream().map(ChannelDto::fromModel).collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<Long, String> getUuids(Set<Long> ids) {
+        final Collection<Channel> allById = channelRepository.findAllById(ids);
+        assert allById.size() == ids.size();
+        final Map<Long, String> idUuidMap = new HashMap<>();
+        for (Channel channel : allById) {
+            idUuidMap.put(channel.getId(), channel.getUuid());
+        }
+        return idUuidMap;
     }
 }

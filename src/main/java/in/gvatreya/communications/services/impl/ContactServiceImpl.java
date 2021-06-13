@@ -1,5 +1,6 @@
 package in.gvatreya.communications.services.impl;
 
+import in.gvatreya.communications.model.Channel;
 import in.gvatreya.communications.model.Contact;
 import in.gvatreya.communications.model.dto.ContactDto;
 import in.gvatreya.communications.repository.ContactRepository;
@@ -12,9 +13,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,5 +52,27 @@ public class ContactServiceImpl implements ContactService {
     public Optional<ContactDto> getContact(@NonNull final String uuid) {
         final Optional<Contact> byUuid = contactRepository.findByUuid(uuid);
         return byUuid.map(ContactDto::fromModel);
+    }
+
+    @Override
+    public Map<Long, String> getUuids(@NonNull List<Long> ids) {
+        final Collection<Contact> allById = contactRepository.findAllById(ids);
+        assert allById.size() == ids.size();
+        final Map<Long, String> idUuidMap = new HashMap<>();
+        for (Contact contact : allById) {
+            idUuidMap.put(contact.getId(), contact.getUuid());
+        }
+        return idUuidMap;
+    }
+
+    @Override
+    public Map<String, Long> getIds(@NonNull List<String> uuids) {
+        final Collection<Contact> allById = contactRepository.findAllByUuid(uuids);
+        assert allById.size() == uuids.size();
+        final Map<String, Long> uuidIdMap = new HashMap<>();
+        for (Contact contact : allById) {
+            uuidIdMap.put(contact.getUuid(), contact.getId());
+        }
+        return uuidIdMap;
     }
 }
