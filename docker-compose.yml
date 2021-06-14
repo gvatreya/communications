@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+  postgres:
+    image: "postgres:alpine"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - APP_DB_USER=sc_admin
+      - APP_DB_PASS=superchat
+      - APP_DB_NAME=communications
+    volumes:
+      - ./etc/sql:/docker-entrypoint-initdb.d/

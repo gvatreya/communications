@@ -1,0 +1,791 @@
+{
+	"info": {
+		"_postman_id": "199dbeff-2032-4de4-acc0-476381c316a6",
+		"name": "Simple Communications",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Create Contact",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"James Potter\",\n    \"email\": \"james@jkr.org\",\n    \"twitterId\": \"@JamesHP\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Contact",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"James Potter\",\n    \"email\": \"james@jkr.org\",\n    \"twitterId\": \"@JamesHP\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Jun 2021 14:04:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"uuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"name\": \"James Potter\",\n    \"email\": \"james@jkr.org\",\n    \"telegramHandle\": null,\n    \"twitterId\": \"@JamesHP\",\n    \"phoneNumber\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Contact by UUID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contacts/fc2d159d-e4c7-4044-bff2-134e9bf7a9d6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contacts",
+								"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Contact by UUID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/contacts/fc2d159d-e4c7-4044-bff2-134e9bf7a9d6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"contacts",
+										"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Jun 2021 10:25:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"uuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"name\": \"James Potter\",\n    \"email\": \"james@jkr.org\",\n    \"telegramHandle\": null,\n    \"twitterId\": \"@JamesHP\",\n    \"phoneNumber\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Find All",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"contacts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Find All",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/contacts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"contacts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Jun 2021 17:38:03 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"uuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n        \"name\": \"James Potter\",\n        \"email\": \"james@jkr.org\",\n        \"telegramHandle\": null,\n        \"twitterId\": \"@JamesHP\",\n        \"phoneNumber\": null\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Channel",
+			"item": [
+				{
+					"name": "Create Channel",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Email\",\n    \"configuration\": \"{\\\"api_key\\\": \\\"abcd-efg\\\",\\\"account_name\\\": \\\"djembe@djembe.in\\\"}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/channels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"channels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Channel",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Email\",\n    \"configuration\": \"{\\\"api_key\\\": \\\"abcd-efg\\\",\\\"account_name\\\": \\\"djembe@djembe.in\\\"}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/channels",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"channels"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Jun 2021 10:08:08 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"uuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n    \"name\": \"Email\",\n    \"configuration\": \"{\\\"api_key\\\": \\\"abcd-efg\\\",\\\"account_name\\\": \\\"djembe@djembe.in\\\"}\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all channels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/channels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"channels"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all channels",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/channels",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"channels"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Jun 2021 05:28:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"uuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n        \"name\": \"Email\",\n        \"configuration\": \"{\\\"api_key\\\": \\\"abcd-efg\\\",\\\"account_name\\\": \\\"djembe@djembe.in\\\"}\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Messages",
+			"item": [
+				{
+					"name": "Send message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"senderUuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n    \"channelUuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n    \"body\": \"This is body of message. Hello Hi\",\n    \"subject\": \"Hi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/messages",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"messages"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Send message",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"senderUuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n    \"channelUuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n    \"body\": \"This is body of message. Hello Hi\",\n    \"subject\": \"Hi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/messages",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"messages"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Jun 2021 17:26:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"uuid\": \"c4bdf2e6-8e06-434f-96e1-ff379fd7ffe2\",\n    \"senderUuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n    \"channelUuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"body\": \"This is body of message. Hello Hi\",\n    \"subject\": \"Hi\",\n    \"deliveryStatus\": \"IN_TRANSIT\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Receive external message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n  \"api_version\": \"2010-04-01\",\n  \"body\": \"McAvoy or Stewart? These timelines can get so confusing.\",\n  \"date_created\": \"Thu, 30 Jul 2015 20:12:31 +0000\",\n  \"date_sent\": \"Thu, 30 Jul 2015 20:12:33 +0000\",\n  \"date_updated\": \"Thu, 30 Jul 2015 20:12:33 +0000\",\n  \"direction\": \"outbound-api\",\n  \"error_code\": null,\n  \"error_message\": null,\n  \"from\": \"+15017122661\",\n  \"messaging_service_sid\": \"MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n  \"num_media\": \"0\",\n  \"num_segments\": \"1\",\n  \"price\": null,\n  \"price_unit\": null,\n  \"sid\": \"SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n  \"status\": \"sent\",\n  \"subresource_uris\": {\n    \"media\": \"/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json\"\n  },\n  \"to\": \"+15558675310\",\n  \"uri\": \"/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/messages/external",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"messages",
+								"external"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Send message",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"senderUuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n    \"channelUuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n    \"body\": \"This is body of message. Hello Hi\",\n    \"subject\": \"Hi\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/messages",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"messages"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Jun 2021 17:26:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"uuid\": \"c4bdf2e6-8e06-434f-96e1-ff379fd7ffe2\",\n    \"senderUuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n    \"channelUuid\": \"fc2d159d-e4c7-4044-bff2-134e9bf7a9d6\",\n    \"body\": \"This is body of message. Hello Hi\",\n    \"subject\": \"Hi\",\n    \"deliveryStatus\": \"IN_TRANSIT\"\n}"
+						},
+						{
+							"name": "Receive external message",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n  \"api_version\": \"2010-04-01\",\n  \"body\": \"McAvoy or Stewart? These timelines can get so confusing.\",\n  \"date_created\": \"Thu, 30 Jul 2015 20:12:31 +0000\",\n  \"date_sent\": \"Thu, 30 Jul 2015 20:12:33 +0000\",\n  \"date_updated\": \"Thu, 30 Jul 2015 20:12:33 +0000\",\n  \"direction\": \"outbound-api\",\n  \"error_code\": null,\n  \"error_message\": null,\n  \"from\": \"+15017122661\",\n  \"messaging_service_sid\": \"MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n  \"num_media\": \"0\",\n  \"num_segments\": \"1\",\n  \"price\": null,\n  \"price_unit\": null,\n  \"sid\": \"SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n  \"status\": \"sent\",\n  \"subresource_uris\": {\n    \"media\": \"/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json\"\n  },\n  \"to\": \"+15558675310\",\n  \"uri\": \"/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/messages/external",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"messages",
+										"external"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Jun 2021 05:09:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Get All messages By ContactId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/messages/contact/36b00c81-dd04-4901-904c-cc506205fc62",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"messages",
+								"contact",
+								"36b00c81-dd04-4901-904c-cc506205fc62"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All messages By ContactId",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/messages/contact/36b00c81-dd04-4901-904c-cc506205fc62",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"messages",
+										"contact",
+										"36b00c81-dd04-4901-904c-cc506205fc62"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Jun 2021 18:21:44 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"uuid\": \"c4bdf2e6-8e06-434f-96e1-ff379fd7ffe2\",\n        \"senderUuid\": \"36b00c81-dd04-4901-904c-cc506205fc62\",\n        \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n        \"channelUuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n        \"body\": \"This is body of message. Hello Hi\",\n        \"subject\": \"Hi\",\n        \"deliveryStatus\": \"ERROR\"\n    },\n    {\n        \"uuid\": \"2f832b4b-926b-4e07-a56d-055e9f981a14\",\n        \"senderUuid\": \"36b00c81-dd04-4901-904c-cc506205fc62\",\n        \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n        \"channelUuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n        \"body\": \"This is body of message. Hello Hi\",\n        \"subject\": \"Hi\",\n        \"deliveryStatus\": \"COMPLETED\"\n    },\n    {\n        \"uuid\": \"0d245d98-8b33-4c63-af7e-233cde8b67bd\",\n        \"senderUuid\": \"36b00c81-dd04-4901-904c-cc506205fc62\",\n        \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n        \"channelUuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n        \"body\": \"This is body of message. Hello Hi\",\n        \"subject\": \"Hi\",\n        \"deliveryStatus\": \"IN_TRANSIT\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Message",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/messages/0d245d98-8b33-4c63-af7e-233cde8b67bd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"messages",
+								"0d245d98-8b33-4c63-af7e-233cde8b67bd"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Message",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/messages/0d245d98-8b33-4c63-af7e-233cde8b67bd",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"messages",
+										"0d245d98-8b33-4c63-af7e-233cde8b67bd"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 Jun 2021 18:36:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"uuid\": \"0d245d98-8b33-4c63-af7e-233cde8b67bd\",\n    \"senderUuid\": \"36b00c81-dd04-4901-904c-cc506205fc62\",\n    \"receiverUuid\": \"b5b3e91b-ff0a-4bab-9593-99c1b5c0699e\",\n    \"channelUuid\": \"ed90fb29-f8eb-4c1a-9ada-631eefc6a832\",\n    \"body\": \"This is body of message. Hello Hi\",\n    \"subject\": \"Hi\",\n    \"deliveryStatus\": \"IN_TRANSIT\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
